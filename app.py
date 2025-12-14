@@ -1,13 +1,15 @@
-import json
+import os
 import telebot
 from prediction import load_teams, predict_match
 
-with open('config.json', 'r') as f:
-    cfg = json.load(f)
+TOKEN = os.environ.get("TELEGRAM_TOKEN")
 
-TOKEN = cfg.get("8299127138:AAFFnQhFJACOO_vwl0kAaA0uD6MqFpPQgOE", "").strip()
 if not TOKEN:
-    print("ERROR: TELEGRAM_TOKEN not set in config.json.")
+    raise RuntimeError("TELEGRAM_TOKEN not set")
+
+bot = telebot.TeleBot(TOKEN)
+teams, meta = load_teams()
+    print("ERROR: TELEGRAM_TOKEN not set")
     raise SystemExit(1)
 
 bot = telebot.TeleBot(TOKEN)
