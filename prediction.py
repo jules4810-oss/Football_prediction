@@ -32,6 +32,8 @@ def predict_match(home, away, teams, meta, max_goals=6):
             "home_win": 0.45,
             "draw": 0.25,
             "away_win": 0.30
+        }
+    }
 
 # Charger token
 with open('config.json', 'r') as f:
