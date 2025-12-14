@@ -1,7 +1,9 @@
 import json
 import telebot
-from import json
-import math
+import json
+import math 
+import numpy as np
+from scipy.stats import poisson
 
 def load_teams():
     with open("teams.json", "r", encoding="utf-8") as f:
