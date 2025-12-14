@@ -9,8 +9,8 @@ if not TOKEN:
 
 bot = telebot.TeleBot(TOKEN)
 teams, meta = load_teams()
-    print("ERROR: TELEGRAM_TOKEN not set")
-    raise SystemExit(1)
+if not TOKEN:
+    raise RuntimeError("TELEGRAM_TOKEN not set")
 
 bot = telebot.TeleBot(TOKEN)
 teams, meta = load_teams()
