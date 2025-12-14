@@ -1,6 +1,35 @@
 import json
 import telebot
-from prediction import load_teams, predict_match
+from import json
+import math
+
+def load_teams():
+    with open("teams.json", "r", encoding="utf-8") as f:
+        teams = json.load(f)
+    meta = {"version": "1.0"}
+    return teams, meta
+
+def predict_match(home, away, teams, meta, max_goals=6):
+    if home not in teams or away not in teams:
+        return {"error": "Team not found"}
+
+    home_strength = teams[home]
+    away_strength = teams[away]
+
+    expected_goals = {
+        home: round(home_strength * 1.2, 2),
+        away: round(away_strength * 1.0, 2)
+    }
+
+    most_likely_score = f"{round(expected_goals[home])}-{round(expected_goals[away])}"
+
+    return {
+        "expected_goals": expected_goals,
+        "most_likely_score": most_likely_score,
+        "outcome_probabilities": {
+            "home_win": 0.45,
+            "draw": 0.25,
+            "away_win": 0.30
 
 # Charger token
 with open('config.json', 'r') as f:
